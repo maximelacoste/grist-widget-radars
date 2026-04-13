@@ -50,7 +50,7 @@
       z-index: 100; align-items: flex-start; justify-content: flex-end;
     }
     #overlay.open { display: flex; }
-    #panel { width: 380px; height: 100%; background: white; overflow-y: auto; box-shadow: -4px 0 20px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
+    #panel { width: 420px; height: 100%; background: white; overflow-y: auto; box-shadow: -4px 0 20px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
     #panel-header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 14px 16px; border-bottom: 1px solid #e2e8f0; background: #f7fafc;
@@ -95,7 +95,7 @@
     /* Grille colonnes avec label custom */
     .cols-grid {
       display: flex; flex-direction: column; gap: 4px;
-      max-height: 200px; overflow-y: auto;
+      max-height: 40vh; overflow-y: auto;
       border: 1px solid #e2e8f0; border-radius: 5px; padding: 6px;
     }
     .col-check-row {
@@ -485,7 +485,7 @@ function buildAccordion(cat, i) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAccordion(e); }
   });
 
-  // Champs config
+  // Champs config (emoji, titre, couleurs, max)
   acc.querySelectorAll('input[data-field]').forEach(inp => {
     inp.addEventListener('input', () => {
       const field = inp.dataset.field;
@@ -493,6 +493,17 @@ function buildAccordion(cat, i) {
       const idx   = getAccordionIndex(acc);
       config[idx][field] = val;
       acc.querySelector('.accordion-title').textContent = `${config[idx].emoji} ${config[idx].title}`;
+    });
+  });
+
+  // ← FIX : mise à jour live des colonnes cochées
+  // Sans ça, buildPanel() lors d'un ajout de graphe remet les cases à zéro
+  acc.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener('change', () => {
+      const idx = getAccordionIndex(acc);
+      const checked = Array.from(acc.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(b => b.dataset.col);
+      config[idx].columns = checked;
     });
   });
 
@@ -553,23 +564,23 @@ document.getElementById('btn-add').addEventListener('click', () => {
   }, 50);
 });
 
-// ── Persistance localStorage ──
-let storageKey = 'grist_radar_default';
-
+// ── Persistance grist.setOption ──
 function saveToStorage() {
-  try { localStorage.setItem(storageKey, JSON.stringify({ config, titleCol })); } catch(e) {}
+  grist.setOption('radarConfig', JSON.stringify({ config, titleCol }));
 }
 
-function loadFromStorage() {
-  try {
-    const raw = localStorage.getItem(storageKey);
-    if (raw) {
-      const data = JSON.parse(raw);
-      // Compatibilité ancien format (tableau direct)
-      if (Array.isArray(data)) { config = data; }
-      else { if (data.config) config = data.config; if (data.titleCol !== undefined) titleCol = data.titleCol; }
-    }
-  } catch(e) {}
+function loadFromOptions(options) {
+  if (!options) return;
+  if (options.radarConfig) {
+    try {
+      const data = JSON.parse(options.radarConfig);
+      if (Array.isArray(data))       { config = data; }
+      else {
+        if (data.config)             config   = data.config;
+        if (data.titleCol !== undefined) titleCol = data.titleCol;
+      }
+    } catch(e) {}
+  }
 }
 
 // ── Sauvegarde ──
@@ -579,14 +590,17 @@ function saveConfig() {
     .filter(el => el.classList.contains('accordion'));
 
   accordions.forEach((acc, i) => {
-    const checked = Array.from(acc.querySelectorAll('input[type="checkbox"]:checked')).map(b => b.dataset.col);
-    if (checked.length > 0) {
-      config[i].columns = checked;
-      config[i].labels = checked.map(col => {
-        const inp = acc.querySelector(`input[data-label-col="${col}"]`);
-        return (inp && inp.value.trim()) ? inp.value.trim() : col;
-      });
-    }
+    if (!config[i]) return;
+    // Lire les checkboxes cochées (pas config[i].columns qui peut être vide pour un nouveau graphe)
+    const checked = Array.from(acc.querySelectorAll('input[type="checkbox"]:checked'))
+      .map(b => b.dataset.col);
+    config[i].columns = checked;
+    config[i].labels  = checked.map(col => {
+      const inp = acc.querySelector(`input[data-label-col="${col}"]`);
+      return (inp && inp.value.trim()) ? inp.value.trim() : col;
+    });
+    // Stocker les rowIds pour détecter les renommages futurs
+    config[i].rowIds = checked.map(col => colIdToRowId[col] || null);
   });
 
   const msgEl = document.getElementById('save-msg');
@@ -671,32 +685,66 @@ document.getElementById('btn-next').addEventListener('click', () => goTo(current
 // ══════════════════════════════════════════
 // GRIST API
 // ══════════════════════════════════════════
-grist.ready({ requiredAccess: 'read table' });
+// rowId → colId courant (mis à jour à chaque chargement des métadonnées)
+let rowIdToColId = {}; // { rowId: colId }
+let colIdToRowId = {}; // { colId: rowId }
+
+async function fetchColMapping() {
+  try {
+    const meta = await grist.docApi.fetchTable('_grist_Tables_column');
+    if (!meta || !meta.colId) return;
+    rowIdToColId = {};
+    colIdToRowId = {};
+    meta.id.forEach((rowId, i) => {
+      rowIdToColId[rowId] = meta.colId[i];
+      colIdToRowId[meta.colId[i]] = rowId;
+    });
+    // Met à jour les rowIds manquants ET corrige les colIds renommés
+    config.forEach(cat => {
+      // Initialise les rowIds si absents
+      if (!cat.rowIds || cat.rowIds.length !== cat.columns.length) {
+        cat.rowIds = cat.columns.map(col => colIdToRowId[col] || null);
+      }
+      // Corrige les colIds qui ont changé suite à un renommage
+      cat.columns = cat.columns.map((col, j) => {
+        const rowId = cat.rowIds[j];
+        if (rowId && rowIdToColId[rowId]) return rowIdToColId[rowId];
+        return col;
+      });
+      // Resynchronise les rowIds après correction
+      cat.rowIds = cat.columns.map(col => colIdToRowId[col] || null);
+    });
+  } catch(e) {}
+}
+
+grist.ready({ requiredAccess: 'full' });
 
 let firstLoad = true;
 
-grist.onRecords(records => {
+grist.onOptions(options => {
+  loadFromOptions(options);
+  applyLang();
+  rebuildGrid();
+  if (currentRecord) renderCharts(currentRecord);
+});
+
+grist.onRecords(async records => {
   if (!records || records.length === 0) return;
   allRecords = records;
   if (records[0]) updateColumns(records[0]);
+  await fetchColMapping(); // ← détecte les renommages à chaque mise à jour
   if (Object.keys(charts).length === 0) rebuildGrid();
+  if (currentRecord) renderCharts(currentRecord);
   updateNav();
 });
 
-grist.onRecord(record => {
+grist.onRecord(async record => {
   if (!record) return;
-
   if (firstLoad) {
     firstLoad = false;
-    // Clé basée sur l'URL — unique par instance hébergée
-    // document.referrer = URL du doc Grist parent, unique par document
-    const ref = document.referrer || window.location.href;
-    storageKey = 'grist_radar_' + btoa(ref).slice(0, 24);
-    loadFromStorage();
-    applyLang();
+    await fetchColMapping();
     rebuildGrid();
   }
-
   updateColumns(record);
   const idx = allRecords.findIndex(r => r.id === record.id);
   if (idx >= 0) currentIndex = idx;
