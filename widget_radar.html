@@ -10,114 +10,71 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; }
 
-    /* ── TOPBAR ── */
     #topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: white; border-bottom: 1px solid #e2e8f0;
       position: sticky; top: 0; z-index: 10;
     }
     #topbar h2 { font-size: 0.95rem; color: #2d3748; }
     #aucun { font-size: 0.85rem; color: #718096; font-style: italic; }
     #topbar-actions { display: flex; align-items: center; gap: 4px; }
 
-    /* ── BOUTONS TOPBAR ── */
     .btn-topbar {
-      background: none;
-      border: 1px solid #cbd5e0;
-      cursor: pointer;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 6px;
-      color: #4a5568;
-      transition: background 0.15s;
+      background: none; border: 1px solid #cbd5e0; cursor: pointer;
+      font-size: 0.78rem; padding: 4px 10px; border-radius: 6px;
+      color: #4a5568; transition: background 0.15s;
     }
     .btn-topbar:hover, .btn-topbar:focus-visible { background: #edf2f7; outline: 2px solid #4299e1; outline-offset: 1px; }
     .btn-icon {
       background: none; border: none; cursor: pointer;
       font-size: 1.1rem; padding: 6px 8px; border-radius: 6px;
-      color: #4a5568; transition: background 0.15s;
-      line-height: 1;
+      color: #4a5568; transition: background 0.15s; line-height: 1;
     }
     .btn-icon:hover, .btn-icon:focus-visible { background: #edf2f7; outline: 2px solid #4299e1; outline-offset: 1px; }
 
-    /* ── GRILLE GRAPHES ── */
     #grilles {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 12px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; padding: 12px;
     }
     .carte {
-      background: white;
-      border-radius: 10px;
-      padding: 12px;
+      background: white; border-radius: 10px; padding: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     }
     .carte h3 {
-      text-align: center;
-      font-size: 0.78rem;
-      color: #4a5568;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      text-align: center; font-size: 0.78rem; color: #4a5568;
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;
     }
     canvas { max-height: 200px; }
 
-    /* ── NAV BAR ── */
     #nav-bar {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 10px;
-      background: #2d3748;
-      border-top: 1px solid #4a5568;
-      position: sticky; bottom: 0; z-index: 10;
+      display: none; align-items: center; justify-content: center;
+      gap: 16px; padding: 10px; background: #2d3748;
+      border-top: 1px solid #4a5568; position: sticky; bottom: 0; z-index: 10;
     }
     .btn-nav {
-      background: #4a5568; border: none; cursor: pointer;
-      color: white; font-size: 1.4rem; width: 44px; height: 44px;
-      border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; transition: background 0.15s;
-      user-select: none;
+      background: #4a5568; border: none; cursor: pointer; color: white;
+      font-size: 1.4rem; width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s; user-select: none;
     }
     .btn-nav:hover, .btn-nav:focus-visible { background: #4299e1; outline: 2px solid white; outline-offset: 2px; }
     .btn-nav:disabled { background: #2d3748; color: #4a5568; cursor: default; }
     .btn-nav:disabled:hover { background: #2d3748; outline: none; }
-    #nav-counter {
-      font-size: 0.85rem; color: #a0aec0; min-width: 60px; text-align: center;
-    }
+    #nav-counter { font-size: 0.85rem; color: #a0aec0; min-width: 60px; text-align: center; }
 
-    /* ── OVERLAY / MODALE CONFIG ── */
     #overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 100;
-      align-items: flex-start;
-      justify-content: flex-end;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.35); z-index: 100;
+      align-items: flex-start; justify-content: flex-end;
     }
     #overlay.open { display: flex; }
     #panel {
-      width: 360px;
-      height: 100%;
-      background: white;
-      overflow-y: auto;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-      display: flex;
-      flex-direction: column;
+      width: 400px; height: 100%; background: white; overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15); display: flex; flex-direction: column;
     }
     #panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 16px;
-      border-bottom: 1px solid #e2e8f0;
-      background: #f7fafc;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 16px; border-bottom: 1px solid #e2e8f0; background: #f7fafc;
       position: sticky; top: 0; z-index: 5;
     }
     #panel-header h3 { font-size: 0.95rem; color: #2d3748; }
@@ -128,141 +85,85 @@
     #btn-close:hover, #btn-close:focus-visible { background: #edf2f7; outline: 2px solid #4299e1; outline-offset: 1px; }
     #panel-body { padding: 12px; flex: 1; }
 
-    /* ── BOUTON AJOUTER ── */
+    /* Section titre */
+    .title-section {
+      margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0;
+    }
+    .title-section label { font-size: 0.82rem; font-weight: 600; color: #2d3748; display: block; margin-bottom: 4px; }
+    .title-section select {
+      width: 100%; border: 1px solid #cbd5e0; border-radius: 5px;
+      padding: 5px 8px; font-size: 0.82rem; font-family: inherit;
+    }
+    .title-section select:focus { outline: 2px solid #4299e1; outline-offset: 1px; }
+
     #btn-add {
-      width: 100%;
-      padding: 9px;
-      margin-bottom: 10px;
-      background: #ebf8ff;
-      border: 1.5px dashed #90cdf4;
-      border-radius: 8px;
-      color: #2b6cb0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
+      width: 100%; padding: 9px; margin-bottom: 10px;
+      background: #ebf8ff; border: 1.5px dashed #90cdf4; border-radius: 8px;
+      color: #2b6cb0; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s;
     }
     #btn-add:hover, #btn-add:focus-visible { background: #bee3f8; outline: 2px solid #4299e1; outline-offset: 1px; }
 
-    /* ── ACCORDÉON ── */
-    .accordion {
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
+    .accordion { border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
     .accordion-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 12px;
-      background: #f7fafc;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #2d3748;
-      user-select: none;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; background: #f7fafc; cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; color: #2d3748; user-select: none;
     }
     .accordion-header:hover, .accordion-header:focus-visible { background: #edf2f7; outline: 2px solid #4299e1; outline-offset: -2px; }
     .accordion-title { flex: 1; }
     .accordion-actions { display: flex; gap: 6px; align-items: center; }
-    .btn-move {
-      background: none; border: none; cursor: pointer;
-      font-size: 0.85rem; color: #718096; padding: 4px 6px; border-radius: 4px;
-    }
+    .btn-move { background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #718096; padding: 4px 6px; border-radius: 4px; }
     .btn-move:hover, .btn-move:focus-visible { background: #e2e8f0; color: #2d3748; outline: 2px solid #4299e1; outline-offset: 1px; }
-    .btn-delete {
-      background: none; border: none; cursor: pointer;
-      font-size: 0.85rem; color: #e53e3e; padding: 4px 6px; border-radius: 4px;
-    }
+    .btn-delete { background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #e53e3e; padding: 4px 6px; border-radius: 4px; }
     .btn-delete:hover, .btn-delete:focus-visible { background: #fff5f5; outline: 2px solid #fc8181; outline-offset: 1px; }
-    .accordion-arrow {
-      margin-left: 4px; font-size: 1rem; font-weight: 700;
-      color: #4a5568; min-width: 16px; text-align: center;
-    }
-    .accordion-body {
-      display: none;
-      padding: 12px;
-      border-top: 1px solid #e2e8f0;
-    }
+    .accordion-arrow { margin-left: 4px; font-size: 1rem; font-weight: 700; color: #4a5568; min-width: 16px; text-align: center; }
+    .accordion-body { display: none; padding: 12px; border-top: 1px solid #e2e8f0; }
     .accordion.open .accordion-body { display: block; }
 
-    /* ── CHAMPS CONFIG ── */
-    .field-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-      align-items: center;
-    }
+    .field-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
     .field-row label { font-size: 0.82rem; color: #2d3748; min-width: 60px; }
-    .field-row input[type="text"],
-    .field-row input[type="number"] {
-      flex: 1;
-      border: 1px solid #cbd5e0;
-      border-radius: 5px;
-      padding: 5px 8px;
-      font-size: 0.82rem;
+    .field-row input[type="text"], .field-row input[type="number"] {
+      flex: 1; border: 1px solid #cbd5e0; border-radius: 5px; padding: 5px 8px; font-size: 0.82rem;
     }
-    .field-row input[type="text"]:focus,
-    .field-row input[type="number"]:focus,
+    .field-row input[type="text"]:focus, .field-row input[type="number"]:focus,
     .field-row input[type="color"]:focus { outline: 2px solid #4299e1; outline-offset: 1px; }
-    .field-row input[type="color"] {
-      width: 36px; height: 30px;
-      border: 1px solid #cbd5e0;
-      border-radius: 5px;
-      padding: 2px; cursor: pointer;
-    }
+    .field-row input[type="color"] { width: 36px; height: 30px; border: 1px solid #cbd5e0; border-radius: 5px; padding: 2px; cursor: pointer; }
     .emoji-input { max-width: 50px !important; text-align: center; }
-    .col-label { font-size: 0.82rem; color: #2d3748; margin-bottom: 6px; font-weight: 600; }
+
+    .col-label { font-size: 0.82rem; color: #2d3748; margin-bottom: 4px; font-weight: 600; }
+    /* Grille colonnes avec colonne label */
     .cols-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      max-height: 160px;
-      overflow-y: auto;
-      border: 1px solid #e2e8f0;
-      border-radius: 5px;
-      padding: 6px;
+      display: flex; flex-direction: column; gap: 3px;
+      max-height: 200px; overflow-y: auto;
+      border: 1px solid #e2e8f0; border-radius: 5px; padding: 6px;
     }
-    .col-check {
-      display: flex; align-items: center; gap: 5px;
-      font-size: 0.8rem; color: #2d3748; cursor: pointer;
+    .cols-grid-header {
+      display: grid; grid-template-columns: 20px 1fr 1fr; gap: 4px;
+      font-size: 0.72rem; color: #a0aec0; padding-bottom: 4px;
+      border-bottom: 1px solid #e2e8f0; margin-bottom: 2px;
     }
-    .col-check input { cursor: pointer; }
+    .col-row {
+      display: grid; grid-template-columns: 20px 1fr 1fr; gap: 4px; align-items: center;
+    }
+    .col-row input[type="checkbox"] { cursor: pointer; }
+    .col-row .col-id {
+      font-size: 0.78rem; color: #4a5568;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .col-row input[type="text"] {
+      font-size: 0.78rem; border: 1px solid #e2e8f0; border-radius: 4px;
+      padding: 2px 5px; font-family: inherit; background: #f7fafc;
+    }
+    .col-row input[type="text"]:focus { outline: 2px solid #4299e1; outline-offset: 1px; background: white; }
     .cols-empty { font-size: 0.8rem; color: #718096; font-style: italic; }
 
-    /* ── FOOTER PANEL ── */
     #panel-footer {
-      padding: 12px 16px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: #f7fafc;
-      position: sticky; bottom: 0;
+      padding: 12px 16px; border-top: 1px solid #e2e8f0;
+      display: flex; flex-direction: column; gap: 6px; background: #f7fafc; position: sticky; bottom: 0;
     }
-    #btn-save {
-      width: 100%;
-      background: #3182ce;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 9px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    #btn-save { width: 100%; background: #3182ce; color: white; border: none; border-radius: 6px; padding: 9px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     #btn-save:hover, #btn-save:focus-visible { background: #2b6cb0; outline: 2px solid #2b6cb0; outline-offset: 2px; }
-    #btn-cancel {
-      width: 100%;
-      background: white;
-      color: #4a5568;
-      border: 1px solid #cbd5e0;
-      border-radius: 6px;
-      padding: 9px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
+    #btn-cancel { width: 100%; background: white; color: #4a5568; border: 1px solid #cbd5e0; border-radius: 6px; padding: 9px; font-size: 0.85rem; cursor: pointer; }
     #btn-cancel:hover, #btn-cancel:focus-visible { background: #edf2f7; outline: 2px solid #4299e1; outline-offset: 1px; }
     #save-msg { font-size: 0.8rem; color: #276749; text-align: center; min-height: 16px; font-weight: 600; }
     #save-msg.error { color: #c53030; }
@@ -289,17 +190,19 @@
   <button class="btn-nav" id="btn-next" disabled></button>
 </nav>
 
-<div id="overlay"
-     role="dialog"
-     aria-modal="true"
-     aria-labelledby="panel-title"
-     tabindex="-1">
+<div id="overlay" role="dialog" aria-modal="true" aria-labelledby="panel-title" tabindex="-1">
   <div id="panel">
     <div id="panel-header">
       <h3 id="panel-title"></h3>
       <button id="btn-close" aria-label=""></button>
     </div>
     <div id="panel-body">
+      <div class="title-section">
+        <label for="title-col-select" id="lbl-title-col">Colonne titre</label>
+        <select id="title-col-select">
+          <option value="">— aucune —</option>
+        </select>
+      </div>
       <button id="btn-add"></button>
       <div id="accordions"></div>
     </div>
@@ -312,71 +215,51 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// INTERNATIONALISATION
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
+// I18N
+// ══════════════════════════════════════════
 const I18N = {
   fr: {
-    selectStudent:   'Sélectionnez un élève dans la table.',
-    btnPresent:      '▶ Présentation',
-    btnConfig:       'Configuration',
-    panelTitle:      '⚙️ Configuration',
-    btnClose:        'Fermer le panneau',
-    btnAdd:          '＋ Ajouter un graphe',
-    btnSave:         '💾 Enregistrer',
-    btnCancel:       'Annuler',
-    savedOk:         '✅ Sauvegardé !',
-    saveError:       '⚠️ Erreur : ',
-    colsEmpty:       "Sélectionnez d'abord un élève",
-    fieldEmoji:      'Emoji',
-    fieldTitle:      'Titre',
-    fieldContour:    'Contour',
-    fieldGrid:       'Repère',
-    fieldMax:        'Max',
-    colsLabel:       'Colonnes incluses :',
-    btnUp:           'Déplacer vers le haut',
-    btnDown:         'Déplacer vers le bas',
-    btnDelete:       'Supprimer ce graphe',
-    navPrev:         'Précédent (←)',
-    navNext:         'Suivant (→)',
-    navRegion:       'Navigation entre élèves',
-    chartRegion:     'Graphes radar',
-    chartAria:       cat => `Graphe radar : ${cat.emoji} ${cat.title}`,
-    noData:          'Graphe radar non disponible.',
-    defaultGraphe:   i => `Graphe ${i + 1}`,
-    grapheTitle:     cat => `${cat.emoji} ${cat.title}`,
-    datasetLabel:    'Score',
+    selectStudent: 'Sélectionnez un enregistrement dans la table.',
+    btnPresent: '▶ Présentation', btnConfig: 'Configuration',
+    panelTitle: '⚙️ Configuration', btnClose: 'Fermer le panneau',
+    btnAdd: '＋ Ajouter un graphe', btnSave: '💾 Enregistrer', btnCancel: 'Annuler',
+    savedOk: '✅ Sauvegardé !', saveError: '⚠️ Erreur : ',
+    colsEmpty: "Sélectionnez d'abord un enregistrement",
+    fieldEmoji: 'Emoji', fieldTitle: 'Titre', fieldContour: 'Contour',
+    fieldGrid: 'Repère', fieldMax: 'Max',
+    colsLabel: 'Colonnes incluses :', colHeaderId: 'Colonne', colHeaderLabel: 'Libellé',
+    titleColLabel: 'Colonne titre (topbar)',
+    btnUp: 'Déplacer vers le haut', btnDown: 'Déplacer vers le bas',
+    btnDelete: 'Supprimer ce graphe',
+    navPrev: 'Précédent (←)', navNext: 'Suivant (→)',
+    navRegion: 'Navigation', chartRegion: 'Graphes radar',
+    chartAria: cat => `Graphe radar : ${cat.emoji} ${cat.title}`,
+    noData: 'Graphe radar non disponible.',
+    defaultGraphe: i => `Graphe ${i + 1}`,
+    grapheTitle: cat => `${cat.emoji} ${cat.title}`,
+    datasetLabel: 'Score',
   },
   en: {
-    selectStudent:   'Select a student in the table.',
-    btnPresent:      '▶ Present',
-    btnConfig:       'Settings',
-    panelTitle:      '⚙️ Settings',
-    btnClose:        'Close panel',
-    btnAdd:          '＋ Add a chart',
-    btnSave:         '💾 Save',
-    btnCancel:       'Cancel',
-    savedOk:         '✅ Saved!',
-    saveError:       '⚠️ Error: ',
-    colsEmpty:       'Select a student first',
-    fieldEmoji:      'Emoji',
-    fieldTitle:      'Title',
-    fieldContour:    'Outline',
-    fieldGrid:       'Grid',
-    fieldMax:        'Max',
-    colsLabel:       'Included columns:',
-    btnUp:           'Move up',
-    btnDown:         'Move down',
-    btnDelete:       'Delete this chart',
-    navPrev:         'Previous (←)',
-    navNext:         'Next (→)',
-    navRegion:       'Student navigation',
-    chartRegion:     'Radar charts',
-    chartAria:       cat => `Radar chart: ${cat.emoji} ${cat.title}`,
-    noData:          'Radar chart unavailable.',
-    defaultGraphe:   i => `Chart ${i + 1}`,
-    grapheTitle:     cat => `${cat.emoji} ${cat.title}`,
-    datasetLabel:    'Score',
+    selectStudent: 'Select a record in the table.',
+    btnPresent: '▶ Present', btnConfig: 'Settings',
+    panelTitle: '⚙️ Settings', btnClose: 'Close panel',
+    btnAdd: '＋ Add a chart', btnSave: '💾 Save', btnCancel: 'Cancel',
+    savedOk: '✅ Saved!', saveError: '⚠️ Error: ',
+    colsEmpty: 'Select a record first',
+    fieldEmoji: 'Emoji', fieldTitle: 'Title', fieldContour: 'Outline',
+    fieldGrid: 'Grid', fieldMax: 'Max',
+    colsLabel: 'Included columns:', colHeaderId: 'Column', colHeaderLabel: 'Label',
+    titleColLabel: 'Title column (topbar)',
+    btnUp: 'Move up', btnDown: 'Move down',
+    btnDelete: 'Delete this chart',
+    navPrev: 'Previous (←)', navNext: 'Next (→)',
+    navRegion: 'Navigation', chartRegion: 'Radar charts',
+    chartAria: cat => `Radar chart: ${cat.emoji} ${cat.title}`,
+    noData: 'Radar chart unavailable.',
+    defaultGraphe: i => `Chart ${i + 1}`,
+    grapheTitle: cat => `${cat.emoji} ${cat.title}`,
+    datasetLabel: 'Score',
   }
 };
 
@@ -386,7 +269,6 @@ let t = I18N[lang];
 function applyLang() {
   t = I18N[lang];
   document.documentElement.lang = lang;
-
   document.getElementById('aucun').textContent         = t.selectStudent;
   document.getElementById('btn-present').textContent   = t.btnPresent;
   document.getElementById('btn-config').textContent    = '⚙️';
@@ -397,7 +279,7 @@ function applyLang() {
   document.getElementById('btn-add').textContent       = t.btnAdd;
   document.getElementById('btn-save').textContent      = t.btnSave;
   document.getElementById('btn-cancel').textContent    = t.btnCancel;
-
+  document.getElementById('lbl-title-col').textContent = t.titleColLabel;
   const navBar = document.getElementById('nav-bar');
   navBar.setAttribute('aria-label', t.navRegion);
   document.getElementById('btn-prev').setAttribute('aria-label', t.navPrev);
@@ -405,8 +287,6 @@ function applyLang() {
   document.getElementById('btn-next').setAttribute('aria-label', t.navNext);
   document.getElementById('btn-next').textContent = '›';
   document.getElementById('grilles').setAttribute('aria-label', t.chartRegion);
-
-  // Mettre à jour les titres des cartes existantes
   config.forEach((cat, i) => {
     const h3 = document.getElementById(`title-${i}`);
     const cv = document.getElementById(`chart-${i}`);
@@ -415,9 +295,9 @@ function applyLang() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // CONFIG PAR DÉFAUT
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 const DEFAULT_CONFIG = [
   {
     emoji: '🗣', title: 'Langage / Language', color: '#63b3ed', gridColor: '#cbd5e0', max: 5,
@@ -442,41 +322,57 @@ const DEFAULT_CONFIG = [
 ];
 
 const PALETTE = ['#63b3ed','#9ae6b4','#fc814a','#b794f4','#f6ad55','#fc8181','#4fd1c5','#667eea'];
+const EXCLUDED_COLS = new Set(['id', 'manualSort']);
 
-let config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-let allColumns = [];
+let config    = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+let titleCol  = '';
+let allColumns  = [];
 let currentRecord = null;
-let charts = {};
-let allRecords = [];
+let charts    = {};
+let allRecords  = [];
 let currentIndex = 0;
 
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
+// UTILITAIRES
+// ══════════════════════════════════════════
+function hexToRgba(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return { bg: `rgba(${r},${g},${b},0.2)`, border: `rgba(${r},${g},${b},1)` };
+}
+
+// Retour à la ligne automatique pour les labels de pointLabels
+function wrapLabel(str, maxLen = 16) {
+  const s = str.replace(/_/g, ' ');
+  if (s.length <= maxLen) return s;
+  const words = s.split(' ');
+  const lines = [];
+  let cur = '';
+  for (const w of words) {
+    const test = cur ? cur + ' ' + w : w;
+    if (test.length > maxLen && cur) { lines.push(cur); cur = w; }
+    else cur = test;
+  }
+  if (cur) lines.push(cur);
+  return lines.length > 1 ? lines : s;
+}
+
+// ══════════════════════════════════════════
 // RENDU GRAPHES
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function rebuildGrid() {
   const grilles = document.getElementById('grilles');
   Object.values(charts).forEach(c => c && c.destroy());
   charts = {};
   grilles.innerHTML = '';
-
   config.forEach((cat, i) => {
     const card = document.createElement('div');
-    card.className = 'carte';
-    card.id = `card-${i}`;
-
+    card.className = 'carte'; card.id = `card-${i}`;
     const h3 = document.createElement('h3');
-    h3.id = `title-${i}`;
-    h3.textContent = t.grapheTitle(cat);
-
+    h3.id = `title-${i}`; h3.textContent = t.grapheTitle(cat);
     const cv = document.createElement('canvas');
-    cv.id = `chart-${i}`;
-    cv.setAttribute('role', 'img');
-    cv.setAttribute('aria-label', t.chartAria(cat));
-    cv.textContent = t.noData; // Fallback textuel
-
-    card.appendChild(h3);
-    card.appendChild(cv);
-    grilles.appendChild(card);
+    cv.id = `chart-${i}`; cv.setAttribute('role', 'img');
+    cv.setAttribute('aria-label', t.chartAria(cat)); cv.textContent = t.noData;
+    card.appendChild(h3); card.appendChild(cv); grilles.appendChild(card);
   });
 }
 
@@ -485,18 +381,24 @@ function renderCharts(record) {
   document.getElementById('aucun').hidden = true;
   const titreEl = document.getElementById('titre');
   titreEl.hidden = false;
-  titreEl.textContent = `${record.Prenom || ''} ${record.Nom || ''}`.trim();
+  // Titre : colonne choisie ou fallback Prenom/Nom
+  titreEl.textContent = (titleCol && record[titleCol] != null)
+    ? String(record[titleCol]).trim()
+    : `${record.Prenom || record.prenom || ''} ${record.Nom || record.nom || ''}`.trim() || `#${record.id}`;
 
   config.forEach((cat, i) => {
-    const titleEl = document.getElementById(`title-${i}`);
+    const titleEl  = document.getElementById(`title-${i}`);
     const canvasEl = document.getElementById(`chart-${i}`);
     if (!titleEl || !canvasEl) return;
-
     titleEl.textContent = t.grapheTitle(cat);
     canvasEl.setAttribute('aria-label', t.chartAria(cat));
 
-    const labels = cat.columns.map((col, j) => cat.labels[j] || col);
-    const data   = cat.columns.map(col => record[col] ?? 0);
+    // Labels avec retour à la ligne automatique
+    const labels = cat.columns.map((col, j) => {
+      const lbl = (cat.labels[j] && cat.labels[j].trim()) ? cat.labels[j] : col;
+      return wrapLabel(lbl);
+    });
+    const data      = cat.columns.map(col => { const v = record[col]; return (v == null) ? 0 : Number(v) || 0; });
     const rgba      = hexToRgba(cat.color);
     const gridColor = cat.gridColor || '#cbd5e0';
 
@@ -515,84 +417,79 @@ function renderCharts(record) {
       const ctx = canvasEl.getContext('2d');
       charts[i] = new Chart(ctx, {
         type: 'radar',
-        data: {
-          labels,
-          datasets: [{
-            label: t.datasetLabel,
-            data,
-            backgroundColor: rgba.bg,
-            borderColor: rgba.border,
-            borderWidth: 2,
-            pointBackgroundColor: rgba.border,
-            pointRadius: 3,
-          }]
-        },
+        data: { labels, datasets: [{ label: t.datasetLabel, data, backgroundColor: rgba.bg, borderColor: rgba.border, borderWidth: 2, pointBackgroundColor: rgba.border, pointRadius: 3 }] },
         options: {
           responsive: true,
           plugins: { legend: { display: false } },
-          scales: {
-            r: {
-              min: 0, max: cat.max,
-              grid: { color: gridColor },
-              angleLines: { color: gridColor },
-              ticks: { stepSize: 1, font: { size: 10 } },
-              pointLabels: { font: { size: 11 } }
-            }
-          }
+          scales: { r: { min: 0, max: cat.max, grid: { color: gridColor }, angleLines: { color: gridColor }, ticks: { stepSize: 1, font: { size: 10 } }, pointLabels: { font: { size: 11 } } } }
         }
       });
     }
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // PANNEAU CONFIG
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function openPanel() {
   buildPanel();
   const overlay = document.getElementById('overlay');
   overlay.classList.add('open');
-  // Accessibilité : focus sur le premier élément focalisable
   requestAnimationFrame(() => {
-    const first = overlay.querySelector('button, [tabindex="0"], input');
+    const first = overlay.querySelector('button, [tabindex="0"], input, select');
     if (first) first.focus();
   });
 }
 
 function closePanel() {
   document.getElementById('overlay').classList.remove('open');
-  // Retour du focus sur le bouton d'ouverture
   document.getElementById('btn-config').focus();
 }
 
 function buildPanel() {
+  // Select colonne titre
+  const sel = document.getElementById('title-col-select');
+  sel.innerHTML = '<option value="">— aucune —</option>';
+  allColumns.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    if (c === titleCol) opt.selected = true;
+    sel.appendChild(opt);
+  });
+
   const container = document.getElementById('accordions');
   container.innerHTML = '';
   config.forEach((cat, i) => container.appendChild(buildAccordion(cat, i)));
 }
 
 function buildAccordion(cat, i) {
-  const excluded = ['id', 'Nom', 'Prenom', 'manualSort'];
-  const available = allColumns.filter(c => !excluded.includes(c));
+  const available = allColumns.filter(c => !EXCLUDED_COLS.has(c));
 
   const acc = document.createElement('div');
-  acc.className = 'accordion';
-  acc.dataset.idx = i;
+  acc.className = 'accordion'; acc.dataset.idx = i;
 
-  const colsHtml = available.length === 0
-    ? `<span class="cols-empty">${t.colsEmpty}</span>`
-    : available.map(col => `
-        <label class="col-check">
-          <input type="checkbox" data-col="${col}" ${cat.columns.includes(col) ? 'checked' : ''}>
-          ${col}
-        </label>`).join('');
+  let colsHtml = '';
+  if (available.length === 0) {
+    colsHtml = `<span class="cols-empty">${t.colsEmpty}</span>`;
+  } else {
+    colsHtml = `
+      <div class="cols-grid-header">
+        <span></span><span>${t.colHeaderId}</span><span>${t.colHeaderLabel}</span>
+      </div>`;
+    colsHtml += available.map(col => {
+      const checked  = cat.columns.includes(col);
+      const colIdx   = cat.columns.indexOf(col);
+      const labelVal = colIdx >= 0 ? (cat.labels[colIdx] || '') : '';
+      return `<div class="col-row">
+        <input type="checkbox" data-col="${col}" ${checked ? 'checked' : ''}>
+        <span class="col-id" title="${col}">${col}</span>
+        <input type="text" data-label-col="${col}" value="${labelVal}" placeholder="${col}">
+      </div>`;
+    }).join('');
+  }
 
   acc.innerHTML = `
-    <div class="accordion-header"
-         role="button"
-         tabindex="0"
-         aria-expanded="false"
-         aria-controls="body-${i}">
+    <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-${i}">
       <span class="accordion-title">${cat.emoji} ${cat.title}</span>
       <div class="accordion-actions">
         <button class="btn-move" data-dir="up"   aria-label="${t.btnUp}">▲</button>
@@ -618,10 +515,8 @@ function buildAccordion(cat, i) {
       </div>
       <p class="col-label">${t.colsLabel}</p>
       <div class="cols-grid" role="group" aria-label="${t.colsLabel}">${colsHtml}</div>
-    </div>
-  `;
+    </div>`;
 
-  // Toggle accordéon (clic + clavier)
   const header = acc.querySelector('.accordion-header');
   function toggleAccordion(e) {
     if (e.target.closest('.accordion-actions button')) return;
@@ -630,11 +525,8 @@ function buildAccordion(cat, i) {
     header.setAttribute('aria-expanded', isOpen);
   }
   header.addEventListener('click', toggleAccordion);
-  header.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAccordion(e); }
-  });
+  header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAccordion(e); } });
 
-  // Mise à jour live des champs
   acc.querySelectorAll('input[data-field]').forEach(inp => {
     inp.addEventListener('input', () => {
       const field = inp.dataset.field;
@@ -645,7 +537,6 @@ function buildAccordion(cat, i) {
     });
   });
 
-  // Monter / Descendre
   acc.querySelector('[data-dir="up"]').addEventListener('click', e => {
     e.stopPropagation();
     const idx = getAccordionIndex(acc);
@@ -656,8 +547,6 @@ function buildAccordion(cat, i) {
     const idx = getAccordionIndex(acc);
     if (idx < config.length - 1) { [config[idx], config[idx+1]] = [config[idx+1], config[idx]]; buildPanel(); }
   });
-
-  // Supprimer
   acc.querySelector('.btn-delete').addEventListener('click', e => {
     e.stopPropagation();
     if (config.length <= 1) return;
@@ -673,39 +562,19 @@ function getAccordionIndex(acc) {
   return Array.from(document.getElementById('accordions').children).indexOf(acc);
 }
 
-// ── Focus trap dans la modale ──────────────────────────────────
 document.getElementById('overlay').addEventListener('keydown', e => {
   if (e.key !== 'Tab') return;
   const panel = document.getElementById('panel');
-  const focusable = Array.from(panel.querySelectorAll(
-    'button:not([disabled]), input, [tabindex="0"]'
-  )).filter(el => !el.closest('[hidden]'));
+  const focusable = Array.from(panel.querySelectorAll('button:not([disabled]), input, select, [tabindex="0"]')).filter(el => !el.closest('[hidden]'));
   if (focusable.length === 0) return;
-  const first = focusable[0];
-  const last  = focusable[focusable.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault(); last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault(); first.focus();
-  }
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
-// Fermer avec Échap
-document.getElementById('overlay').addEventListener('keydown', e => {
-  if (e.key === 'Escape') closePanel();
-});
+document.getElementById('overlay').addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-// ── Ajouter un graphe ─────────────────────────────────────────
 document.getElementById('btn-add').addEventListener('click', () => {
-  const newCat = {
-    emoji: '📊',
-    title: t.defaultGraphe(config.length),
-    color: PALETTE[config.length % PALETTE.length],
-    gridColor: '#cbd5e0',
-    max: 5,
-    columns: [],
-    labels: []
-  };
-  config.push(newCat);
+  config.push({ emoji: '📊', title: t.defaultGraphe(config.length), color: PALETTE[config.length % PALETTE.length], gridColor: '#cbd5e0', max: 5, columns: [], labels: [] });
   buildPanel();
   setTimeout(() => {
     const last = document.getElementById('accordions').lastElementChild;
@@ -713,78 +582,61 @@ document.getElementById('btn-add').addEventListener('click', () => {
   }, 50);
 });
 
-// ── Sauvegarde ────────────────────────────────────────────────
+// Select colonne titre
+document.getElementById('title-col-select').addEventListener('change', e => {
+  titleCol = e.target.value;
+  if (currentRecord) renderCharts(currentRecord);
+});
+
+// ── Sauvegarde ──
 async function saveConfig() {
   const accordions = document.getElementById('accordions').children;
   Array.from(accordions).forEach((acc, i) => {
+    if (!config[i]) return;
     const checked = Array.from(acc.querySelectorAll('input[type="checkbox"]:checked')).map(b => b.dataset.col);
-    if (checked.length > 0) {
-      config[i].columns = checked;
-      config[i].labels = checked.map(col => {
-        for (const def of DEFAULT_CONFIG) {
-          const j = def.columns.indexOf(col);
-          if (j >= 0) return def.labels[j];
-        }
-        return col;
-      });
-    }
+    config[i].columns = checked;
+    config[i].labels  = checked.map(col => {
+      const inp = acc.querySelector(`input[data-label-col="${col}"]`);
+      return (inp && inp.value.trim()) ? inp.value.trim() : col;
+    });
   });
 
   const msgEl = document.getElementById('save-msg');
   try {
-    await grist.setOption('radarConfig', JSON.stringify(config));
-    msgEl.className = '';
-    msgEl.textContent = t.savedOk;
+    await grist.setOption('radarConfig', JSON.stringify({ config, titleCol }));
+    msgEl.className = ''; msgEl.textContent = t.savedOk;
     rebuildGrid();
     if (currentRecord) renderCharts(currentRecord);
     setTimeout(() => { msgEl.textContent = ''; closePanel(); }, 900);
   } catch(e) {
-    msgEl.className = 'error';
-    msgEl.textContent = t.saveError + e.message;
+    msgEl.className = 'error'; msgEl.textContent = t.saveError + e.message;
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// UTILITAIRES
-// ═══════════════════════════════════════════════════════════════
-function hexToRgba(hex) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
-  return { bg: `rgba(${r},${g},${b},0.2)`, border: `rgba(${r},${g},${b},1)` };
-}
-
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // ÉVÉNEMENTS UI
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 document.getElementById('btn-config').addEventListener('click', openPanel);
 document.getElementById('btn-close').addEventListener('click', closePanel);
 document.getElementById('btn-cancel').addEventListener('click', closePanel);
 document.getElementById('btn-save').addEventListener('click', saveConfig);
-document.getElementById('overlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('overlay')) closePanel();
-});
+document.getElementById('overlay').addEventListener('click', e => { if (e.target === document.getElementById('overlay')) closePanel(); });
 
-
-// ── Bouton présentation ───────────────────────────────────────
 document.getElementById('btn-present').addEventListener('click', () => {
   if (allRecords.length === 0) return;
   try {
     const payload = { config, records: allRecords, index: currentIndex };
-    const b64     = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
     window.open('presenter.html#' + b64, '_blank');
   } catch(e) { alert('Erreur : ' + e.message); }
 });
 
-// ── Navigation ────────────────────────────────────────────────
 function updateNav() {
   const counter = document.getElementById('nav-counter');
   const btnPrev = document.getElementById('btn-prev');
   const btnNext = document.getElementById('btn-next');
   if (allRecords.length === 0) {
-    counter.textContent = '— / —';
-    btnPrev.disabled = true;
-    btnNext.disabled = true;
+    counter.textContent = '— / —'; btnPrev.disabled = true; btnNext.disabled = true;
   } else {
     counter.textContent = `${currentIndex + 1} / ${allRecords.length}`;
     btnPrev.disabled = currentIndex <= 0;
@@ -794,24 +646,28 @@ function updateNav() {
 
 function goTo(index) {
   if (index < 0 || index >= allRecords.length) return;
-  currentIndex = index;
-  renderCharts(allRecords[currentIndex]);
-  updateNav();
+  currentIndex = index; renderCharts(allRecords[currentIndex]); updateNav();
 }
 
 document.getElementById('btn-prev').addEventListener('click', () => goTo(currentIndex - 1));
 document.getElementById('btn-next').addEventListener('click', () => goTo(currentIndex + 1));
 
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // GRIST API
-// ═══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════
 grist.ready({ requiredAccess: 'read table' });
 
 grist.onOptions(options => {
-  if (options) {
-    if (options.radarConfig) {
-      try { config = JSON.parse(options.radarConfig); } catch(e) {}
-    }
+  if (options && options.radarConfig) {
+    try {
+      const saved = JSON.parse(options.radarConfig);
+      // Compatibilité ancien format (tableau direct)
+      if (Array.isArray(saved))           { config = saved; }
+      else {
+        if (saved.config)                 config   = saved.config;
+        if (saved.titleCol !== undefined) titleCol = saved.titleCol;
+      }
+    } catch(e) {}
   }
   applyLang();
   rebuildGrid();
@@ -821,20 +677,22 @@ grist.onOptions(options => {
 grist.onRecords(records => {
   if (!records || records.length === 0) return;
   allRecords = records;
-  if (allColumns.length === 0) allColumns = Object.keys(records[0]);
+  // ← FIX : toujours mettre à jour (résout le problème des lookupOne)
+  allColumns = Object.keys(records[0]).filter(k => k !== 'manualSort');
   if (Object.keys(charts).length === 0) rebuildGrid();
   updateNav();
 });
 
 grist.onRecord(record => {
   if (!record) return;
+  // ← FIX : mettre à jour les colonnes à chaque record aussi
+  allColumns = Object.keys(record).filter(k => k !== 'manualSort');
   const idx = allRecords.findIndex(r => r.id === record.id);
   if (idx >= 0) currentIndex = idx;
   updateNav();
   renderCharts(record);
 });
 
-// Init
 applyLang();
 rebuildGrid();
 </script>
