@@ -16,8 +16,10 @@ Visualise des scores sur plusieurs axes sous forme de graphes radar, directement
 
 * **N graphes radar** (sans limite) organisés en grille 2 colonnes
 * **Colonnes dynamiques** — détectées automatiquement à chaque enregistrement, compatibles avec les colonnes calculées et les `lookupOne`
-* **Labels personnalisables** — renommer chaque axe directement dans le panneau de config, sans toucher aux noms de colonnes Grist
-* **Configuration persistée dans `localStorage`** — aucune barre "Enregistrer" déclenchée, config isolée par table
+* **Labels personnalisables** — renommer chaque axe dans le panneau ⚙️, sans modifier les noms de colonnes Grist
+* **Infobulle au survol** — affiche la valeur + la **description native de la colonne Grist** (panneau colonne → Description) au survol de chaque point
+* **Colonne titre configurable** — choisir quelle colonne s'affiche dans la topbar
+* **Configuration persistée** via `grist.setOption` — config stockée dans le document Grist, partagée entre utilisateurs
 * Par graphe : titre, emoji, couleur du contour, couleur de la grille, échelle max
 * Ajout, suppression et réorganisation des graphes depuis le panneau ⚙️
 * **Mode présentation** — ouvre `presenter.html` dans un nouvel onglet avec navigation clavier et plein écran
@@ -30,12 +32,12 @@ Visualise des scores sur plusieurs axes sous forme de graphes radar, directement
 
 Les deux fichiers `widget_radar.html` et `presenter.html` doivent être hébergés **au même endroit** depuis un serveur autorisant l'intégration en iframe.
 
-[Netlify](https://netlify.com) fonctionne parfaitement et est gratuit :
+> ℹ️ GitHub Pages fonctionne si ton dépôt est public et que Grist est configuré pour autoriser cette source.
+
+[Netlify](https://netlify.com) est une alternative gratuite :
 1. Télécharge `widget_radar.html` et `presenter.html`
 2. **Add new site → Deploy manually** → glisse-dépose un dossier contenant les deux fichiers
 3. Netlify fournit une URL du type `https://ton-site.netlify.app/widget_radar.html`
-
-> ℹ️ GitHub Pages fonctionne aussi si ton dépôt est public et que Grist est configuré pour autoriser cette source.
 
 #### 2. Ajouter le widget dans Grist
 
@@ -43,23 +45,32 @@ Les deux fichiers `widget_radar.html` et `presenter.html` doivent être héberg�
 2. Coller l'URL du fichier hébergé
 3. Configurer **"Sélectionner par"** sur ta table de données
 4. Régler l'**accès aux données** sur **"Lire la table"**
-5. Cliquer sur un enregistrement → les graphes s'affichent
+5. Dans le panneau de droite, section **Colonnes visibles**, cocher les colonnes à transmettre au widget
+6. Cliquer sur un enregistrement → les graphes s'affichent
+
+> ⚠️ Les colonnes doivent être cochées dans "Colonnes visibles" (panneau Grist) pour être accessibles au widget. C'est un comportement natif de Grist.
 
 #### 3. Configurer les graphes
 
 Cliquer sur **⚙️** en haut à droite pour ouvrir le panneau de configuration.
 
-Pour chaque graphe :
-
 | Champ | Description |
 |---|---|
+| **Colonne titre** | Colonne affichée dans la topbar (ex. Nom, Identifiant) |
 | Emoji + Titre | Libellé du graphe |
 | Contour | Couleur de l'étoile |
 | Repère | Couleur de la grille de fond |
 | Max | Valeur maximale de l'échelle |
 | Colonnes | Cases à cocher + champ libellé pour renommer chaque axe |
 
-#### 4. Mode présentation
+#### 4. Infobulles au survol
+
+Au survol d'un point du graphe, le tooltip affiche :
+- Le libellé de l'axe
+- La valeur du score
+- La **description native** de la colonne Grist (si renseignée dans **Panneau colonne → Description**)
+
+#### 5. Mode présentation
 
 Cliquer sur **▶ Présentation** pour ouvrir `presenter.html` dans un nouvel onglet :
 - Navigation **← →** au clavier entre les enregistrements
@@ -77,9 +88,7 @@ Une ligne = un enregistrement. Les scores sont dans des colonnes numériques (di
 | `compor_attention` | Score d'attention |
 | … | … |
 
-Les noms de colonnes sont entièrement configurables depuis le panneau ⚙️.
-
-Un fichier CSV de démonstration (`eleves_scores.csv`) est disponible pour tester rapidement.
+Les noms de colonnes et leurs libellés sont entièrement configurables depuis le panneau ⚙️.
 
 ### Fichiers
 
@@ -100,8 +109,10 @@ Displays scores on multiple axes as radar (spider) charts, directly inside Grist
 
 * **N radar charts** (unlimited) arranged in a 2-column grid
 * **Dynamic columns** — auto-detected on every record, compatible with formula columns and `lookupOne`
-* **Custom labels** — rename each axis directly in the config panel, without changing Grist column names
-* **localStorage persistence** — no Grist "Save layout" bar, config scoped per table
+* **Custom labels** — rename each axis in the ⚙️ panel, without changing Grist column names
+* **Hover tooltips** — shows value + **native Grist column description** (column panel → Description) on point hover
+* **Configurable title column** — choose which column appears in the topbar
+* **Persistent config** via `grist.setOption` — stored in the Grist document, shared across users
 * Per chart: title, emoji, outline colour, grid colour, max scale
 * Add, remove and reorder charts from the ⚙️ panel
 * **Presentation mode** — opens `presenter.html` in a new tab with keyboard navigation and full-screen support
@@ -114,12 +125,12 @@ Displays scores on multiple axes as radar (spider) charts, directly inside Grist
 
 Both `widget_radar.html` and `presenter.html` must be hosted **at the same location** on a server that allows iframe embedding.
 
-[Netlify](https://netlify.com) works perfectly and is free:
+> ℹ️ GitHub Pages works if your repo is public and Grist is configured to allow that source.
+
+[Netlify](https://netlify.com) is a free alternative:
 1. Download `widget_radar.html` and `presenter.html`
 2. **Add new site → Deploy manually** → drag-and-drop a folder with both files
 3. Netlify gives you a URL like `https://your-site.netlify.app/widget_radar.html`
-
-> ℹ️ GitHub Pages also works if your repo is public and Grist is configured to allow that source.
 
 #### 2. Add the widget in Grist
 
@@ -127,23 +138,32 @@ Both `widget_radar.html` and `presenter.html` must be hosted **at the same locat
 2. Paste the hosted file URL
 3. Set **"Select by"** to your data table
 4. Set **Data access** to **"Read table"**
-5. Click a record → charts appear
+5. In the right panel, under **Visible columns**, check the columns to pass to the widget
+6. Click a record → charts appear
+
+> ⚠️ Columns must be checked under "Visible columns" (Grist panel) to be accessible to the widget. This is native Grist behaviour.
 
 #### 3. Configure the charts
 
 Click **⚙️** at the top right to open the configuration panel.
 
-Per chart:
-
 | Field | Description |
 |---|---|
+| **Title column** | Column shown in the topbar (e.g. Name, ID) |
 | Emoji + Title | Chart label |
 | Outline | Star colour |
 | Grid | Background grid colour |
 | Max | Maximum scale value |
 | Columns | Checkboxes + label input to rename each axis |
 
-#### 4. Presentation mode
+#### 4. Hover tooltips
+
+Hovering over a chart point shows:
+- The axis label
+- The score value
+- The **native Grist column description** (if set in **Column panel → Description**)
+
+#### 5. Presentation mode
 
 Click **▶ Present** to open `presenter.html` in a new tab:
 - **← →** keyboard navigation between records
@@ -161,9 +181,7 @@ One row = one record. Scores are in numeric columns (direct, formula, or `lookup
 | `compor_attention` | Attention score |
 | … | … |
 
-Column names are fully configurable from the ⚙️ panel.
-
-A demo CSV file (`eleves_scores.csv`) is available for quick testing.
+Column names and labels are fully configurable from the ⚙️ panel.
 
 ### Files
 
